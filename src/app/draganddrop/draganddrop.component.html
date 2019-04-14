@@ -1,0 +1,38 @@
+<div>
+  <div class="grid1-custome">
+    <ejs-grid id='Grid' #grid [dataSource]='srcData' [pageSettings]="pageOptions" [allowSelection]="true"
+      [allowRowDragAndDrop]="true" [selectionSettings]="selectionOptions" [rowDropSettings]="srcDropOptions" (rowDrop)="rowDropSrcHandler($event)">
+      <e-columns>
+        <e-column field='interPreterName' headerText='Available Interpreters' textAlign='Left' width=120></e-column>
+      </e-columns>
+    </ejs-grid>
+  </div>
+  <div class="left-right-arrow-div">
+    <div class="left-right-arrow-aline">
+      <button mat-icon-button (click)="onRightArrowClick()">
+        <mat-icon>keyboard_arrow_right</mat-icon>
+      </button>
+      <button mat-icon-button (click)="onLeftArrowClick()">
+        <mat-icon>keyboard_arrow_left</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="grid2-custome">
+    <ejs-grid id='DestGrid' #destgrid [dataSource]='destData' [pageSettings]="pageOptions" [allowSelection]="true"
+      [allowRowDragAndDrop]="true" [selectionSettings]="selectionOptions" [rowDropSettings]="destDropOptions" (rowDrop)="rowDropDestHandler($event)">
+      <e-columns>
+        <e-column field='interPreterName' headerText='Interpreter Priority List' textAlign='Left' width=120></e-column>
+      </e-columns>
+    </ejs-grid>
+  </div>
+  <div class="fourth-div">
+    <div class="left-right-arrow-aline">
+      <button mat-icon-button (click)="onUpArrowClick()">
+        <mat-icon>keyboard_arrow_up</mat-icon>
+      </button>
+      <button mat-icon-button (click)="onDownArrowClick()">
+        <mat-icon>keyboard_arrow_down</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>
