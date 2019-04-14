@@ -27,13 +27,13 @@ export class DraganddropComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.srcData = dataGrid1;
-    this.destData = dataGrid2;
+    this.srcData = [...dataGrid1];
+    this.destData = [...dataGrid2];
     this.pageOptions = { pageCount: 2 };
     this.srcDropOptions = { targetID: 'DestGrid' };
     this.destDropOptions = { targetID: 'Grid' };
-    this.selectionOptions = { type: 'Multiple', mode: 'Row' };
-    this.grid.allowSelection = true;
+    this.selectionOptions = { type: 'Multiple' };
+    // this.grid.allowSelection = true;
 
   }
 
@@ -45,9 +45,9 @@ export class DraganddropComponent implements OnInit {
     }
     this.grid.refresh();
     this.destgrid.refresh();
-    setTimeout(() => {
-      console.log(this.getData());
-    }, 100);
+    // setTimeout(() => {
+    //   console.log(this.getData());
+    // }, 100);
   }
 
   onLeftArrowClick() {
@@ -58,9 +58,9 @@ export class DraganddropComponent implements OnInit {
     }
     this.grid.refresh();
     this.destgrid.refresh();
-    setTimeout(() => {
-      console.log(this.getData());
-    }, 100);
+    // setTimeout(() => {
+    //   console.log(this.getData());
+    // }, 100);
   }
 
   onUpArrowClick() {
@@ -72,9 +72,9 @@ export class DraganddropComponent implements OnInit {
       }
     }
     this.destgrid.refresh();
-    setTimeout(() => {
-      console.log(this.getData());
-    }, 100);
+    // setTimeout(() => {
+    //   console.log(this.getData());
+    // }, 100);
   }
 
   onDownArrowClick() {
@@ -86,9 +86,9 @@ export class DraganddropComponent implements OnInit {
       }
     }
     this.destgrid.refresh();
-    setTimeout(() => {
-      console.log(this.getData());
-    }, 100);
+    // setTimeout(() => {
+    //   console.log(this.getData());
+    // }, 100);
   }
 
   arrayMove(arr, oldIndex, newIndex) {
@@ -111,15 +111,23 @@ export class DraganddropComponent implements OnInit {
   }
 
   rowDropSrcHandler(event) {
-    setTimeout(() => {
-      console.log(this.getData());
-    }, 100);
+    for (let i = 0, len = event.data.length; i < len; i++) {
+      this.removeElemFromArray(this.srcData, event.data[i]['interPreterName']);
+    }
+    this.grid.refresh();
+    // setTimeout(() => {
+    //   console.log(this.getData());
+    // }, 100);
   }
 
   rowDropDestHandler(event) {
-    setTimeout(() => {
-      console.log(this.getData());
-    }, 100);
+    for (let i = 0, len = event.data.length; i < len; i++) {
+      this.removeElemFromArray(this.destData, event.data[i]['interPreterName']);
+    }
+    this.destgrid.refresh();
+    // setTimeout(() => {
+    //   console.log(this.getData());
+    // }, 100);
   }
 
   getSelectedRow(idName) {
