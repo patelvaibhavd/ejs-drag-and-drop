@@ -38,32 +38,62 @@ export class DraganddropComponent implements OnInit {
   }
 
   onRightArrowClick() {
-    const selectedIds = this.getSelectedRow('Grid');
-    for (let i = 0, len = selectedIds.length; i < len; i++) {
-      this.destData.push({ 'interPreterName': selectedIds[i] });
-      this.removeElemFromArray(this.srcData, selectedIds[i]);
+    let selectedrowindex: number[] = this.grid.getSelectedRowIndexes();  // Get the selected row indexes.
+    let selectedrecords: any[] = this.grid.getSelectedRecords();  // Get the selected records.
+    if (selectedrowindex.length > 0) {
+      for (var i = 0; i < selectedrowindex.length; i++) {//only for push boz it change the current array index
+        this.destData.push(selectedrecords[i]);//add in destination array grid
+      }
+      selectedrowindex = selectedrowindex.sort(function (a, b) { return b - a });
+      for (var i = 0; i < selectedrowindex.length; i++) {
+        this.srcData.splice(selectedrowindex[i], 1); //remove from original grid  
+      }
+      //refresh both the grid
+      this.grid.refresh();
+      this.destgrid.refresh();
     }
-    this.grid.refresh();
-    this.destgrid.refresh();
-    // setTimeout(() => {
-    //   console.log(this.getData());
-    // }, 100);
+    // const selectedIds = this.getSelectedRow('Grid');
+    // for (let i = 0, len = selectedIds.length; i < len; i++) {
+    //   this.destData.push({ 'interPreterName': selectedIds[i] });
+    //   this.removeElemFromArray(this.srcData, selectedIds[i]);
+    // }
+    // this.grid.refresh();
+    // this.destgrid.refresh();
+    setTimeout(() => {
+      console.log(this.getData());
+    }, 100);
   }
 
   onLeftArrowClick() {
-    const selectedIds = this.getSelectedRow('DestGrid');
-    for (let i = 0, len = selectedIds.length; i < len; i++) {
-      this.srcData.push({ 'interPreterName': selectedIds[i] });
-      this.removeElemFromArray(this.destData, selectedIds[i]);
+    let selectedrowindex: number[] = this.destgrid.getSelectedRowIndexes();  // Get the selected row indexes.
+    let selectedrecords: any[] = this.destgrid.getSelectedRecords();  // Get the selected records.
+    if (selectedrowindex.length > 0) {
+      for (var i = 0; i < selectedrowindex.length; i++) {//only for push boz it change the current array index
+        this.srcData.push(selectedrecords[i]);//add in destination array grid
+      }
+      selectedrowindex = selectedrowindex.sort(function (a, b) { return b - a });
+      for (var i = 0; i < selectedrowindex.length; i++) {//remove from the array
+        this.destData.splice(selectedrowindex[i], 1); //remove from original grid
+      }
+      // this.grid.getDataRows();
+      //refresh both the grid
+      this.grid.refresh();
+      this.destgrid.refresh();
     }
-    this.grid.refresh();
-    this.destgrid.refresh();
-    // setTimeout(() => {
-    //   console.log(this.getData());
-    // }, 100);
+    // const selectedIds = this.getSelectedRow('DestGrid');
+    // for (let i = 0, len = selectedIds.length; i < len; i++) {
+    //   this.srcData.push({ 'interPreterName': selectedIds[i] });
+    //   this.removeElemFromArray(this.destData, selectedIds[i]);
+    // }
+    // this.grid.refresh();
+    // this.destgrid.refresh();
+    setTimeout(() => {
+      console.log(this.getData());
+    }, 100);
   }
 
   onUpArrowClick() {
+
     const selectedIds = this.getSelectedRow('DestGrid');
     for (let i = 0, len = selectedIds.length; i < len; i++) {
       const pos = this.destData.map(function (e) { return e['interPreterName']; }).indexOf(selectedIds[i]);
@@ -72,12 +102,13 @@ export class DraganddropComponent implements OnInit {
       }
     }
     this.destgrid.refresh();
-    // setTimeout(() => {
-    //   console.log(this.getData());
-    // }, 100);
+    setTimeout(() => {
+      console.log(this.getData());
+    }, 100);
   }
 
   onDownArrowClick() {
+
     const selectedIds = this.getSelectedRow('DestGrid');
     for (let i = 0, len = selectedIds.length; i < len; i++) {
       const pos = this.destData.map(function (e) { return e['interPreterName']; }).indexOf(selectedIds[i]);
@@ -86,9 +117,9 @@ export class DraganddropComponent implements OnInit {
       }
     }
     this.destgrid.refresh();
-    // setTimeout(() => {
-    //   console.log(this.getData());
-    // }, 100);
+    setTimeout(() => {
+      console.log(this.getData());
+    }, 100);
   }
 
   arrayMove(arr, oldIndex, newIndex) {
@@ -115,9 +146,9 @@ export class DraganddropComponent implements OnInit {
       this.removeElemFromArray(this.srcData, event.data[i]['interPreterName']);
     }
     this.grid.refresh();
-    // setTimeout(() => {
-    //   console.log(this.getData());
-    // }, 100);
+    setTimeout(() => {
+      console.log(this.getData());
+    }, 100);
   }
 
   rowDropDestHandler(event) {
@@ -125,9 +156,9 @@ export class DraganddropComponent implements OnInit {
       this.removeElemFromArray(this.destData, event.data[i]['interPreterName']);
     }
     this.destgrid.refresh();
-    // setTimeout(() => {
-    //   console.log(this.getData());
-    // }, 100);
+    setTimeout(() => {
+      console.log(this.getData());
+    }, 100);
   }
 
   getSelectedRow(idName) {
